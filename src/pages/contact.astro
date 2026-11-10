@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+import site from "../content/settings/site.json";
+
+const mapsQuery = encodeURIComponent(
+  `${site.address.street}, ${site.address.city}, ${site.address.country}`,
+);
+const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+const whatsappMessage = encodeURIComponent(site.whatsapp.greeting);
+const whatsappUrl = `https://wa.me/${site.whatsapp.number}?text=${whatsappMessage}`;
+const socialLinks = [
+  { label: "Instagram", href: site.social.instagram },
+  { label: "Facebook", href: site.social.facebook },
+  { label: "Catalogue WhatsApp", href: site.social.whatsappCatalog },
+].filter((link) => link.href);
+---
+
+<BaseLayout
+  title="Nous trouver"
+  description="Adresse, horaires, contact et demande de devis du Jardin de Bastos, restaurant afro-fusion à Bastos, Yaoundé."
+>
+  <section class="page-intro page-intro--contact" aria-labelledby="page-title">
+    <div class="page-intro__copy">
+      <p class="eyebrow eyebrow--light">Le plaisir commence avant la première bouchée</p>
+      <h1 id="page-title">Votre prochaine belle <em>rencontre.</em></h1>
+      <p>Une réservation, un projet, une question ? Le Jardin vous répond.</p>
+    </div>
+    <div class="page-intro__ornament" aria-hidden="true">
+      <span class="page-intro__ornament-ring"></span>
+      <span class="page-intro__ornament-leaf"></span>
+      <span class="page-intro__ornament-dot"></span>
+    </div>
+    <div class="page-intro__foot">
+      <span>Rue 1.792 · Bastos</span><span aria-hidden="true">✳</span><span>Yaoundé, Cameroun</span>
+    </div>
+  </section>
+
+  <section class="contact-layout section-pad" aria-label="Coordonnées et formulaire">
+    <div class="contact-info">
+      <div class="section-kicker"><span>01</span><span>Le Jardin vous répond</span></div>
+      <h2>À portée <em>de voix.</em></h2>
+      <p class="contact-info__intro">
+        Nous sommes au cœur de Bastos, à quelques pas de l'Ambassade du Japon.
+        Appelez-nous ou écrivez-nous directement.
+      </p>
+      <div class="contact-detail">
+        <span class="contact-detail__label">Téléphone</span>
+        <a href={`tel:${site.phone.link}`}>{site.phone.display} <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail__label">WhatsApp</span>
+        <a href={whatsappUrl} target="_blank" rel="noreferrer">
+          {site.whatsapp.display} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail__label">Courriel</span>
+        <a href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail__label">Adresse</span>
+        <p>{site.address.street}<br />{site.address.landmark}<br />{site.address.city}, {site.address.country}</p>
+      </div>
+      <div class="contact-hours">
+        <span class="contact-detail__label">Les portes du Jardin</span>
+        <p>{site.hours.days}<br /><strong>{site.hours.open}</strong><br />{site.hours.closed}</p>
+      </div>
+      {
+        socialLinks.length > 0 && (
+          <div class="contact-socials">
+            {socialLinks.map((link) => (
+              <a href={link.href} target="_blank" rel="noreferrer">
+                {link.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    <div class="contact-form-wrap" id="formulaire">
+      <div class="section-kicker"><span>02</span><span>Votre message</span></div>
+      <h2>Écrivons <em>la suite.</em></h2>
+      <p>Pour un devis, une réservation ou simplement nous dire bonjour.</p>
+      <ContactForm />
+    </div>
+  </section>
+
+  <section class="map-section section-pad section-pad--cream" aria-labelledby="map-title">
+    <div class="map-copy">
+      <div class="section-kicker"><span>03</span><span>Un détour qui en vaut la peine</span></div>
+      <p class="eyebrow">Au cœur de Bastos</p>
+      <h2 id="map-title">L'adresse du <em>Jardin.</em></h2>
+      <p>{site.address.street}<br />{site.address.landmark}<br />{site.address.city}, {site.address.country}</p>
+      <a class="button button--dark" href={mapsSearchUrl} target="_blank" rel="noreferrer">
+        Rechercher cette adresse <span aria-hidden="true">↗</span>
+      </a>
+      <p class="map-copy__note">La recherche ouvre Google Maps à partir de l'adresse textuelle. Le repère exact sera confirmé avant la publication.</p>
+    </div>
+    <div class="map-art" role="img" aria-label="Illustration décorative du quartier, sans repère géographique exact">
+      <span class="map-art__street map-art__street--one"></span>
+      <span class="map-art__street map-art__street--two"></span>
+      <span class="map-art__street map-art__street--three"></span>
+      <span class="map-art__green map-art__green--one"></span>
+      <span class="map-art__green map-art__green--two"></span>
+      <span class="map-art__pin" aria-hidden="true"><span>J</span></span>
+      <span class="map-art__label">BASTOS · YAOUNDÉ</span>
+      <span class="map-art__caption">Illustration d'orientation · non géolocalisée</span>
+    </div>
+  </section>
+</BaseLayout>

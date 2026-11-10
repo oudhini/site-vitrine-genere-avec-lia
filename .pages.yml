@@ -1,0 +1,258 @@
+media:
+  input: public/media
+  output: /media
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+  categories: [image]
+
+content:
+  - name: site-settings
+    label: Coordonnées et horaires
+    type: file
+    path: src/content/settings/site.json
+    format: json
+    fields:
+      - name: name
+        label: Nom du restaurant
+        type: string
+        required: true
+      - name: tagline
+        label: Signature
+        type: string
+        required: true
+      - name: description
+        label: Description du site
+        type: text
+      - name: siteUrl
+        label: Adresse du site
+        type: string
+        readonly: true
+      - name: phone
+        label: Téléphone
+        type: object
+        fields:
+          - name: display
+            label: Numéro affiché
+            type: string
+          - name: link
+            label: Numéro cliquable
+            type: string
+      - name: whatsapp
+        label: WhatsApp
+        type: object
+        fields:
+          - name: display
+            label: Numéro affiché
+            type: string
+          - name: number
+            label: Numéro international sans espaces
+            type: string
+          - name: greeting
+            label: Message d'accueil
+            type: text
+      - name: email
+        label: E-mail
+        type: string
+      - name: address
+        label: Adresse
+        type: object
+        fields:
+          - name: street
+            label: Rue et quartier
+            type: string
+          - name: landmark
+            label: Repère
+            type: string
+          - name: city
+            label: Ville
+            type: string
+          - name: country
+            label: Pays
+            type: string
+      - name: hours
+        label: Horaires
+        type: object
+        fields:
+          - name: days
+            label: Jours d'ouverture
+            type: string
+          - name: open
+            label: Heures d'ouverture
+            type: string
+          - name: closed
+            label: Jour fermé
+            type: string
+      - name: story
+        label: Présentation du restaurant
+        type: object
+        fields:
+          - name: intro
+            label: Notre histoire
+            type: text
+          - name: chef
+            label: La cuisine du Chef
+            type: text
+      - name: heroImage
+        label: Photo d'ouverture
+        type: image
+      - name: heroImageAlt
+        label: Description de la photo d'ouverture
+        type: string
+      - name: social
+        label: Réseaux sociaux
+        type: object
+        fields:
+          - name: instagram
+            label: Instagram
+            type: string
+          - name: facebook
+            label: Facebook
+            type: string
+          - name: whatsappCatalog
+            label: Catalogue WhatsApp
+            type: string
+
+  - name: dishes
+    label: Plats signatures
+    type: collection
+    path: src/content/dishes
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: Nom du plat
+        type: string
+        required: true
+      - name: category
+        label: Famille de saveurs
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: order
+        label: Ordre d'affichage
+        type: number
+      - name: image
+        label: Photo du plat
+        type: image
+      - name: imageAlt
+        label: Description de la photo
+        type: string
+      - name: status
+        label: Publication
+        type: select
+        options:
+          values:
+            - name: draft
+              label: Brouillon
+            - name: published
+              label: Publié
+
+  - name: services
+    label: Services
+    type: collection
+    path: src/content/services
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: Titre du service
+        type: string
+        required: true
+      - name: eyebrow
+        label: Introduction courte
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: details
+        label: Informations complémentaires
+        type: text
+      - name: order
+        label: Ordre d'affichage
+        type: number
+      - name: action
+        label: Type d'action
+        type: select
+        options:
+          values: [reservation, quote, order]
+      - name: actionLabel
+        label: Texte du bouton
+        type: string
+      - name: whatsappMessage
+        label: Message WhatsApp prérempli
+        type: text
+      - name: status
+        label: Publication
+        type: select
+        options:
+          values: [draft, published]
+
+  - name: gallery
+    label: Galerie photo
+    type: collection
+    path: src/content/gallery
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: Légende
+        type: string
+        required: true
+      - name: image
+        label: Photographie
+        type: image
+      - name: imageAlt
+        label: Description de l'image
+        type: string
+      - name: order
+        label: Ordre d'affichage
+        type: number
+      - name: status
+        label: Publication
+        type: select
+        options:
+          values: [draft, published]
+
+  - name: testimonials
+    label: Témoignages
+    type: collection
+    path: src/content/testimonials
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: name
+      sort: order
+      order: asc
+    fields:
+      - name: quote
+        label: Témoignage
+        type: text
+        required: true
+      - name: name
+        label: Nom ou attribution approuvée
+        type: string
+        required: true
+      - name: context
+        label: Contexte (facultatif)
+        type: string
+      - name: order
+        label: Ordre d'affichage
+        type: number
+      - name: status
+        label: Publication
+        type: select
+        options:
+          values: [draft, published]

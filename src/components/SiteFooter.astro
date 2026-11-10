@@ -1,0 +1,53 @@
+---
+import site from "../content/settings/site.json";
+
+const socialLinks = [
+  { label: "Instagram", href: site.social.instagram },
+  { label: "Facebook", href: site.social.facebook },
+  { label: "Catalogue WhatsApp", href: site.social.whatsappCatalog },
+].filter((link) => link.href);
+---
+
+<footer class="site-footer">
+  <div class="site-footer__main">
+    <div class="site-footer__brand">
+      <a class="brand brand--footer" href="/" aria-label="Le Jardin de Bastos — accueil">
+        <span class="brand__monogram" aria-hidden="true">J<span>.</span></span>
+        <span class="brand__name">Le Jardin <span>de Bastos</span></span>
+      </a>
+      <p>Une table à Bastos.<br />Un jardin à part.</p>
+    </div>
+    <div class="site-footer__column">
+      <h2>Nous trouver</h2>
+      <address>
+        {site.address.street}<br />
+        {site.address.city}, {site.address.country}
+      </address>
+      <a href={`tel:${site.phone.link}`}>{site.phone.display}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </div>
+    <div class="site-footer__column">
+      <h2>Le temps du Jardin</h2>
+      <p>{site.hours.days}<br />{site.hours.open}</p>
+      <p class="site-footer__muted">{site.hours.closed}</p>
+    </div>
+    <div class="site-footer__column">
+      <h2>Suivre le Jardin</h2>
+      {
+        socialLinks.length ? (
+          socialLinks.map((link) => (
+            <a href={link.href} target="_blank" rel="noreferrer">
+              {link.label} <span aria-hidden="true">↗</span>
+            </a>
+          ))
+        ) : (
+          <p class="site-footer__muted">Nos liens officiels seront ajoutés ici.</p>
+        )
+      }
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <span>© {new Date().getFullYear()} {site.name}</span>
+    <span>Cuisine afro-fusion · Bastos, Yaoundé</span>
+  </div>
+</footer>

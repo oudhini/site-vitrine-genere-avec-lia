@@ -1,0 +1,104 @@
+<form
+  class="contact-form"
+  name="contact"
+  method="POST"
+  action="/merci/"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="contact-form__trap" aria-hidden="true">
+    <label>Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <div class="form-row">
+    <label for="nom">Nom complet <span aria-hidden="true">*</span></label>
+    <input
+      id="nom"
+      name="nom"
+      type="text"
+      autocomplete="name"
+      required
+      minlength="2"
+      placeholder="Votre nom"
+    />
+  </div>
+  <div class="form-row form-row--split">
+    <div>
+      <label for="telephone">Téléphone <span aria-hidden="true">*</span></label>
+      <input
+        id="telephone"
+        name="telephone"
+        type="tel"
+        autocomplete="tel"
+        inputmode="tel"
+        required
+        placeholder="+237 ..."
+      />
+    </div>
+    <div>
+      <label for="email">E-mail <span aria-hidden="true">*</span></label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        placeholder="vous@exemple.com"
+      />
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="objet">Votre demande <span aria-hidden="true">*</span></label>
+    <select id="objet" name="objet" required>
+      <option value="" selected disabled>Choisir un sujet</option>
+      <option>Réservation</option>
+      <option>Traiteur</option>
+      <option>Privatisation</option>
+      <option>À emporter / Livraison</option>
+      <option>Autre demande</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="message">Votre message <span aria-hidden="true">*</span></label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      required
+      minlength="10"
+      placeholder="Dites-nous en quelques mots comment nous pouvons vous aider."
+    ></textarea>
+  </div>
+  <p class="contact-form__note">
+    Les informations transmises servent à nous permettre de répondre à votre demande.
+  </p>
+  <button class="button button--dark" type="submit">
+    Envoyer ma demande <span aria-hidden="true">↗</span>
+  </button>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".contact-form");
+  const subject = form?.querySelector<HTMLSelectElement>("#objet");
+  const whatsapp = document.querySelector<HTMLAnchorElement>(".whatsapp-fab");
+
+  if (subject) {
+    const requestedSubject = new URLSearchParams(window.location.search).get("objet");
+    const option = Array.from(subject.options).find(
+      (item) => item.value.toLowerCase() === requestedSubject?.toLowerCase(),
+    );
+
+    if (option) subject.value = option.value;
+  }
+
+  if (form && whatsapp && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        whatsapp.classList.toggle("whatsapp-fab--concealed", entry.isIntersecting);
+      },
+      { rootMargin: "-5% 0px -5% 0px" },
+    );
+
+    observer.observe(form);
+  }
+</script>

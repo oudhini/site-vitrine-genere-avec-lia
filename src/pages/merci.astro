@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Merci pour votre message"
+  description="Votre demande a bien été transmise au Jardin de Bastos."
+  path="/merci/"
+  noindex={true}
+>
+  <section class="thank-you section-pad" aria-labelledby="merci-title">
+    <span class="thank-you__mark" aria-hidden="true">✳</span>
+    <p class="eyebrow">Votre message a pris le chemin du Jardin</p>
+    <h1 id="merci-title">Merci pour <em>votre mot.</em></h1>
+    <p>Votre demande a été transmise. Nous reviendrons vers vous dès que possible.</p>
+    <a class="button button--dark" href="/">Retourner au Jardin <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>

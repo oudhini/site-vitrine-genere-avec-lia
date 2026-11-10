@@ -1,0 +1,38 @@
+{
+  "name": "Le Jardin de Bastos",
+  "tagline": "L'élégance de la cuisine afro-fusion au cœur de Bastos",
+  "description": "Restaurant gastronomique afro-fusion et grillades à Bastos, Yaoundé. Une cuisine inspirée par le terroir camerounais, à savourer au jardin.",
+  "siteUrl": "https://jardindebastos.cm",
+  "phone": {
+    "display": "+237 699 45 82 10",
+    "link": "+237699458210"
+  },
+  "whatsapp": {
+    "display": "+237 677 12 34 56",
+    "number": "237677123456",
+    "greeting": "Bonjour Le Jardin de Bastos, je souhaiterais obtenir des informations."
+  },
+  "email": "contact@jardindebastos.cm",
+  "address": {
+    "street": "Rue 1.792, Quartier Bastos",
+    "landmark": "À 100 m de l'Ambassade du Japon",
+    "city": "Yaoundé",
+    "country": "Cameroun"
+  },
+  "hours": {
+    "days": "Mardi – dimanche",
+    "open": "11h30 – 23h30",
+    "closed": "Lundi · fermé"
+  },
+  "story": {
+    "intro": "Fondé en 2022 au cœur du quartier diplomatique de Bastos, Le Jardin de Bastos cultive une rencontre entre cuisine afro-fusion, grillades et saveurs du terroir camerounais.",
+    "chef": "Sous l'impulsion du Chef Armand Nkodo, la carte met à l'honneur les produits frais locaux et les épices de Penja, dans une interprétation contemporaine des goûts d'ici."
+  },
+  "heroImage": "",
+  "heroImageAlt": "",
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "whatsappCatalog": ""
+  }
+}
